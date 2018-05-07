@@ -29,6 +29,7 @@
 #include "xnco_baby.h" //new shit
 #include "xnco_mom.h" //also new shit
 #include "xlms_hw.h" //also also new shit
+#include "xnco.h"
 
 /* ---------------------------------------------------------------------------- *
  * 							Prototype Functions									*
