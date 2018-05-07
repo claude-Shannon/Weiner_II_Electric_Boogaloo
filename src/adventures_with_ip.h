@@ -34,9 +34,10 @@
  * 							Prototype Functions									*
  * ---------------------------------------------------------------------------- */
 void menu();
-void tonal_noise();
-void audio_stream();
-void lms_filter();
+void mom_beat();
+void baby_beat();
+void both_beat();
+void filter();
 unsigned char gpio_init();
 void nco_init(void *InstancePtr);
 
@@ -92,6 +93,7 @@ XGpio Gpio_audio_enable; // GPIO instance for digital mute
 XNco_baby baby;
 XNco_mom mom;
 XLms_hw lms;
+XNco Nco;
 
 
 #endif /* ADVENTURES_WITH_IP_H_ */
