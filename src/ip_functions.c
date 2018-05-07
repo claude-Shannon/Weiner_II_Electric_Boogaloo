@@ -132,12 +132,12 @@ void mom_beat(void) //just mom
 	static const u32 mom_size = 51510; //maximum address value
 	static u32 address = 0;
 
-	u32 mom_out, in_left, prev_left, out_left;
+	u32 nco_out, in_left, prev_left, out_left;
 
 	while (!XUartPs_IsReceiveData(UART_BASEADDR)){
 	/* Sample L+R audio from the codec */
-	in_left = Xil_In32(I2S_DATA_RX_L_REG);
-	if(in_left != prev_left)
+	//in_left = Xil_In32(I2S_DATA_RX_L_REG);
+	//if(in_left != prev_left)
 		{
 
 			/* Read step size value from DIP switches */
@@ -153,27 +153,31 @@ void mom_beat(void) //just mom
 
 			/* Input scaled step size to the NCO core */
 			//XNco_Set_step_size_V(&Nco, nco_in);
-			XNco_mom_Set_address_V(&mom, address);
+	//		XNco_mom_Set_address_V(&mom, address);
 
 			/* Receive sinusoidal sample from NCO core */
-			mom_out = XNco_mom_Get_ekg_sample_V(&mom);
+	//		mom_out = XNco_mom_Get_ekg_sample_V(&mom);
 
-			if(address==mom_size){
-				address=0;
-			}
-			else{
-				address=address+1;
-			}
+	//		if(address==mom_size){
+	//			address=0;
+	//		}
+	//		else{
+	//			address=address+1;
+	//		}
 
 	//		/* Add scaled noise component to the L+R audio samples */
 	//		out_left =  temp + in_left;
 	//		out_right = temp + in_right;
 
 			/* Output corrupted audio to the codec */
-			Xil_Out32(I2S_DATA_TX_L_REG, mom_out);
-			Xil_Out32(I2S_DATA_TX_R_REG, mom_out);
+			u32 step;
+			step=1;
+			XNco_Set_step_size_V=(&Nco,step);
+			nco_out = XNco_Get_sine_sample_V(&Nco);
+			Xil_Out32(I2S_DATA_TX_L_REG, nco_out);
+			Xil_Out32(I2S_DATA_TX_R_REG, nco_out);
 
-			prev_left = in_left;
+	//		prev_left = in_left;
 
 			//XNco_Get_sine_sample_V(&Nco);
 
