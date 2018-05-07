@@ -24,11 +24,12 @@ int main(void)
 
 	/* Initialise GPIO and NCO peripherals */
 	gpio_init();
-	//nco_init(&Nco);
+	nco_init(&Nco);
 	//initialize OUR hardware?
 	baby_init(&baby);
 	mom_init(&mom);
 	lms_init(&lms);
+	nco_init(&nco);
 	
 
 	xil_printf("GPIO and NCO peripheral configured\r\n");
@@ -89,14 +90,12 @@ void menu(){
 		break;
 	case 'b':
 		xil_printf("STREAMING BABY BEAT\r\n");
-		xil_printf("Select step size via the DIP switches...\r\n\n");
 		xil_printf("Press 'q' to return to the main menu\r\n");
 		XGpio_DiscreteWrite(&Gpio_audio_enable, 1, 1);
 		baby_beat();
 		break;
 	case 'B':
 		xil_printf("STREAMING COMBINED BEATS\r\n");
-		xil_printf("Select step size via the DIP switches...\r\n\n");
 		xil_printf("Press 'q' to return to the main menu\r\n");
 		XGpio_DiscreteWrite(&Gpio_audio_enable, 1, 1);
 		both_beat();
