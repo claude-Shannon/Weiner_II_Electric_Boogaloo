@@ -52,7 +52,7 @@ void menu(){
 	u32 CntrlRegister;
 
 	/* Turn off all LEDs */
-	Xil_Out32(LED_BASE, 0);
+	//Xil_Out32(LED_BASE, 0);
 
 	XGpio_DiscreteWrite(&Gpio_audio_enable, 1, 0);
 
@@ -63,8 +63,12 @@ void menu(){
 				   XUARTPS_CR_TX_EN | XUARTPS_CR_RX_EN));
 
 	xil_printf("\r\n\r\n");
-	xil_printf("Embedded LMS Filtering Demo\r\n");
-	xil_printf("Enter 's' to stream pure audio, 'n' to add tonal noise and 'f' to adaptively filter\r\n");
+	xil_printf("Weiner II Electric Boogaloo\r\n");
+	xil_printf("Enter 'M' to stream the mother's heart beat\r\n");
+	xil_printf("Enter 'b' to stream the baby's heart beat\r\n");
+	xil_printf("Enter 'B' to stream the both the baby and the mother's heart beat\r\n");
+	xil_printf("Enter 'f' to begin filtering our the mother's heartbeat from the combined audio\r\n");
+	xil_printf("Enter 'q' to return to the menu\r\n");
 	xil_printf("----------------------------------------\r\n");
 
 	// Wait for input from UART via the terminal
@@ -72,29 +76,34 @@ void menu(){
 				inp = XUartPs_ReadReg(UART_BASEADDR, XUARTPS_FIFO_OFFSET);
 	// Select function based on UART input
 	switch(inp){
-	case 's':
-		xil_printf("STREAMING AUDIO\r\n");
+	case 'M':
+		xil_printf("STREAMING MOTHER BEATS\r\n");
 		xil_printf("Press 'q' to return to the main menu\r\n");
 		XGpio_DiscreteWrite(&Gpio_audio_enable, 1, 1);
-		audio_stream();
+		mom_beat();
 		break;
-	case 'n':
-		xil_printf("ENTERING NOISE GENERATION OPERATION\r\n");
+	case 'b':
+		xil_printf("STREAMING BABY BEAT\r\n");
 		xil_printf("Select step size via the DIP switches...\r\n\n");
 		xil_printf("Press 'q' to return to the main menu\r\n");
 		XGpio_DiscreteWrite(&Gpio_audio_enable, 1, 1);
-		tonal_noise();
+		baby_beat();
 		break;
-	case 'f':
-		xil_printf("ENTERING LMS FILTERING OPERATION\r\n");
+	case 'B':
+		xil_printf("STREAMING COMBINED BEATS\r\n");
+		xil_printf("Select step size via the DIP switches...\r\n\n");
 		xil_printf("Press 'q' to return to the main menu\r\n");
 		XGpio_DiscreteWrite(&Gpio_audio_enable, 1, 1);
-		lms_filter();
+		both_beat();
+		break;
+	case 'f':
+		xil_printf("ENTERING ADAPTIVE FILTERING OPERATION\r\n");
+		xil_printf("Press 'q' to return to the main menu\r\n");
+		XGpio_DiscreteWrite(&Gpio_audio_enable, 1, 1);
+		filter(); 
 		break;
 	default:
 		menu();
 		break;
 	} // switch
 } // menu()
-
-
