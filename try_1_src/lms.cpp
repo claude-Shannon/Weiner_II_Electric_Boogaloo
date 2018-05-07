@@ -13,7 +13,7 @@ void lms_hw (ap_fixed<16,2> noise_in, ap_fixed<16,2> signal_noise, ap_fixed<16,2
 	
 	static ap_shift_reg<ap_fixed<16,2>, MAX> y; //noise input shift register guy
 	static ap_fixed<16,2> h[MAX]; //filter coeff's initialized to zero - static variables initialize to zero, hurray
-	static const ap_fixed<16,2> mu = .125; // mu is always .125 and should only be defined once
+	static const ap_fixed<16,2> mu = 0.125; // mu is always .125 and should only be defined once
 	// perhaps make mu an input to change filter behavior on the fly???
 	//ap_fixed<16,2> output = ap_fixed<16,2>(0); //output value
 	int p; //defined as zero in the loops

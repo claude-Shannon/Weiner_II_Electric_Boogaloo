@@ -28,14 +28,6 @@ void lms_sw(ap_fixed<16,2> noise_in, ap_fixed<16,2> signal_noise, ap_fixed<16,2>
 }
 
 
-ap_fixed<16,2> input_sw;
-ap_fixed<16,2> input_hw;
-ap_fixed<16,2> input_sw_noise;
-ap_fixed<16,2> input_hw_noise;
-ap_fixed<16,2> *output_hw;
-ap_fixed<16,2> *output_sw;
-ap_fixed<16,2> sw, hw;
-
 
 int main()
 {
@@ -44,8 +36,8 @@ int main()
 	ap_fixed<16,2> input_hw;
 	ap_fixed<16,2> input_sw_noise;
 	ap_fixed<16,2> input_hw_noise;
-	ap_fixed<16,2> *output_hw;
-	ap_fixed<16,2> *output_sw;
+	ap_fixed<16,2> output_hw;
+	ap_fixed<16,2> output_sw;
 	ap_fixed<16,2> sw, hw;
 
 	
@@ -58,14 +50,14 @@ int main()
 
 
 	//Call to software model of fir
-  	lms_sw(input_sw, input_sw_noise, output_sw);
+  	lms_sw(input_sw, input_sw_noise, &output_sw);
 
 	//Call to hardware model of fir
-	lms_hw(input_hw, input_hw_noise, output_hw);
+	lms_hw(input_hw, input_hw_noise, &output_hw);
 
 
-	sw = *output_sw;
-	hw = *output_hw;
+	sw = output_sw;
+	hw = output_hw;
 	if(sw != hw){
 		printf("ERROR: i = %d\n",i);
 		     return 1;
