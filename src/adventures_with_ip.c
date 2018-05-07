@@ -23,8 +23,13 @@ int main(void)
 	xil_printf("SSM2603 configured\n\r");
 
 	/* Initialise GPIO and NCO peripherals */
-	//gpio_init();
+	gpio_init();
 	//nco_init(&Nco);
+	//initialize OUR hardware?
+	baby_init(&baby);
+	mom_init(&mom);
+	lms_init(&lms);
+	
 
 	xil_printf("GPIO and NCO peripheral configured\r\n");
 
@@ -67,7 +72,7 @@ void menu(){
 	xil_printf("Enter 'M' to stream the mother's heart beat\r\n");
 	xil_printf("Enter 'b' to stream the baby's heart beat\r\n");
 	xil_printf("Enter 'B' to stream the both the baby and the mother's heart beat\r\n");
-	xil_printf("Enter 'f' to begin filtering our the mother's heartbeat from the combined audio\r\n");
+	xil_printf("Enter 'f' to begin filtering out the mother's heartbeat from the combined audio\r\n");
 	xil_printf("Enter 'q' to return to the menu\r\n");
 	xil_printf("----------------------------------------\r\n");
 
