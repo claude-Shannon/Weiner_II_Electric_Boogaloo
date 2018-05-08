@@ -34,11 +34,15 @@
  * 							Prototype Functions									*
  * ---------------------------------------------------------------------------- */
 void menu();
-void tonal_noise();
-void audio_stream();
-void lms_filter();
+void mom_beat();
+void baby_beat();
+void both_beat();
+void filter();
 unsigned char gpio_init();
-void nco_init(void *InstancePtr);
+void lms_init(void *InstancePtr);
+void mom_init(void *InstancePtr);
+void baby_init(void *InstancePtr);
+
 
 /* ---------------------------------------------------------------------------- *
  * 						Redefinitions from xparameters.h 						*
