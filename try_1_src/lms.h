@@ -5,6 +5,7 @@
 #include "ap_fixed.h"
 #include "ap_shift_reg.h"
 
+#define MAX 32
 
 #define RUN_LENGTH 100
 
